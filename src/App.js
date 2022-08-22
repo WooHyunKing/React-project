@@ -2,53 +2,27 @@ import Button from "./Button";
 import styles from "./App.module.css";
 import { useEffect, useState } from "react";
 
-function App() {
-  const [counter, setCounter] = useState(0);
-  const [keyword, setKeyword] = useState("");
-  const onClick = () => {
-    setCounter((prev) => prev + 1);
-  };
-  const onChange = (event) => {
-    setKeyword(event.target.value);
-  };
-  //state가 변화할 때마다 컴포넌트 전체가 다시 실행됨(Rerender)
-  //useEffect는 첫 번째 컴포넌트 렌더링에만 코드가 실행되고 다른 state변화에는 실행되지 않도록 함
-  //즉, 특정 코드의 실행되는 시점을 결정(선택)하기 위해서 useEffect를 사용 -> 일종의 리렌더링의 방어막 역할
-  console.log("I run all the time");
-
-  //useEffect는 실행하려는 코드/dependency(지켜보려는 것) 이 두가지를 인수로 가짐
-
+//컴포넌트는 JSX를 반환하는 함수이다 !! (무조껀 맨 앞글자는 대문자)
+function Hello() {
   useEffect(() => {
-    console.log("I run only once");
+    console.log("Created :)");
+    //Cleanup Function : 컴포넌트가 destory, 즉 사라질 때 실행되는 함수
+    return () => console.log("Destoryed :(");
   }, []);
+  return <h1>Hello</h1>; //JSX
+}
 
-  //아래의 코드는 react.js에게 'keyword'를 지켜보라고 말해주는 것
-  //keyword가 변화할 때에 코드를 실행하라는 의미
-  useEffect(() => {
-    // if (keyword !== "" && keyword.length > 5) {
-    //   console.log("Search for", keyword);
-    // }
-    console.log("I run when 'keyword' state changes");
-  }, [keyword]);
-
-  useEffect(() => {
-    console.log("I run when 'counter' state changes");
-  }, [counter]);
-
-  useEffect(() => {
-    console.log("I run when keyword and counter change");
-  }, [keyword, counter]);
+function App() {
+  const [showing, setShowing] = useState(false);
+  const onClick = () => {
+    setShowing((prev) => !prev);
+  };
 
   return (
     <div>
-      <input
-        value={keyword}
-        onChange={onChange}
-        type="text"
-        placeholder="Search here..."
-      ></input>
-      <h1 className={styles.title}>{counter}</h1>
-      <button onClick={onClick}>Click me!!!</button>
+      {/*JS를 작성할 때는 중괄호를 열어줘야함 !!!*/}
+      {showing ? <Hello /> : null}
+      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
     </div>
   );
 }
