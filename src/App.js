@@ -7,6 +7,7 @@ function Hello() {
   useEffect(() => {
     console.log("Created :)");
     //Cleanup Function : 컴포넌트가 destory, 즉 사라질 때 실행되는 함수
+    //컴포넌트가 생성될 때는 useEffect가, 사라질 때는 Cleanup Function(리턴 값)이 실행됨
     return () => console.log("Destoryed :(");
   }, []);
   return <h1>Hello</h1>; //JSX
