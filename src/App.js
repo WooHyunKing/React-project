@@ -14,16 +14,44 @@ function Hello() {
 }
 
 function App() {
-  const [showing, setShowing] = useState(false);
-  const onClick = () => {
-    setShowing((prev) => !prev);
+  const [toDo, setToDo] = useState("");
+  const [toDos, setToDos] = useState([]);
+  const onChange = (event) => {
+    setToDo(event.target.value);
   };
+  const onSubmit = (event) => {
+    event.preventDefault();
+    if (toDo === "") {
+      return;
+    }
+    setToDos((currentArray) => [toDo, ...currentArray]); //modifer 함수의 사용법 첫번째 : 함수 전달(함수의 첫번째 인자로 현재 state를 전달)
+    setToDo(""); //modifer 함수의 사용법 첫번째 : 값 전달
+  };
+
+  console.log(toDos);
 
   return (
     <div>
       {/*JS를 작성할 때는 중괄호를 열어줘야함 !!!*/}
-      {showing ? <Hello /> : null}
-      <button onClick={onClick}>{showing ? "Hide" : "Show"}</button>
+      <h1>My To Dos ({toDos.length})</h1>
+      <form onSubmit={onSubmit}>
+        <input
+          value={toDo}
+          type="text"
+          placeholder="Write your to do list"
+          onChange={onChange}
+        ></input>
+        <button>Add To Do</button>
+      </form>
+      <hr />
+
+      {/* map함수는 하나의 array에 있는 item을 내가 원하는 것으로 바꿔주고 그 item으로 새로운 array를 만들어 반환하는 역할 */}
+      {/* 즉, 이전의 array를 변형하여 새로운 array를 만드는 것 !! */}
+      <ul>
+        {toDos.map((item, index) => (
+          <li key={index}>{item}</li>
+        ))}
+      </ul>
     </div>
   );
 }
