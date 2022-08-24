@@ -24,7 +24,7 @@ function App() {
     if (toDo === "") {
       return;
     }
-    setToDos((currentArray) => [toDo, ...currentArray]); //modifer 함수의 사용법 첫번째 : 함수 전달(함수의 첫번째 인자로 현재 state를 전달)
+    setToDos((currentArray) => [...currentArray, toDo]); //modifer 함수의 사용법 첫번째 : 함수 전달(함수의 첫번째 인자로 현재 state를 전달)
     setToDo(""); //modifer 함수의 사용법 첫번째 : 값 전달
   };
 
