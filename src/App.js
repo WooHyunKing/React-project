@@ -1,5 +1,25 @@
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Home from "./routes/Home";
+import Detail from "./routes/Detail";
+
+//react-router-dom은 라우팅과 관련된 컴포넌트들의 집합
+//이 컴포넌트들은 URL을 바라보고 있음
+//Link는 브라우저 새로고침 없이도 유저를 다른 페이지로 이동시켜주는 컴포넌트 !
+
 function App() {
-  return null;
+  return (
+    <Router>
+      {/* Switch는 한번에 하나의 라우터(페이지/스크린)만 렌더링하기 위함 ! */}
+      <Switch>
+        <Route path="/movie">
+          <Detail />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </Router>
+  );
 }
 
 // 🔥 새롭게 배운 내용 정리
