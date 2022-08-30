@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import Point from "../components/Point";
 
 function Detail() {
   const { id } = useParams();
@@ -23,13 +24,16 @@ function Detail() {
       {loading2 ? (
         <h1>Loading</h1>
       ) : (
-        <div>
-          <img src={movie.medium_cover_image} alt={movie.title}></img>
-          <h3>Title : {movie.title}</h3>
-          <h3>Download Count : {movie.download_count}</h3>
-          <p>{movie.summary}</p>
-          <h3>Genre : {movie.genres}</h3>
-        </div>
+        <Point
+          background_image_original={movie.background_image_original}
+          medium_cover_image={movie.medium_cover_image}
+          url={movie.url}
+          title_long={movie.title_long}
+          rating={movie.rating}
+          runtime={movie.runtime}
+          genres={movie.genres}
+          download_count={movie.download_count}
+        />
       )}
     </div>
   );
